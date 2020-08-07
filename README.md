@@ -19,7 +19,7 @@ Translate and respond to messages posted on discord Bot. Translation is done by 
 
 # Quick Start
 
-1. [https://cloud.google.com/translate/docs/setup#using_the_service_account_key_file_in_your_environment](サービスアカウントJSON形式のキーファイルを得て)、 `docker-compose.yml` の `GOOGLE_APPLICATION_CREDENTIALS` が示すパスに置く。デフォルトでは `${workspaceFolder}/sa-key.json`.
+1. [サービスアカウントJSON形式のキーファイルを得て](https://cloud.google.com/translate/docs/setup#using_the_service_account_key_file_in_your_environment)、 `docker-compose.yml` の `GOOGLE_APPLICATION_CREDENTIALS` が示すパスに置く。デフォルトでは `${workspaceFolder}/sa-key.json`.
 1. [Discord のサーバーを作る](https://support.discord.com/hc/ja/articles/204849977-%E3%82%B5%E3%83%BC%E3%83%90%E3%83%BC%E3%81%AE%E4%BD%9C%E6%88%90%E3%81%AE%E4%BB%95%E6%96%B9)
 1. [Discord Developer Portal](https://discord.com/developers/applications) 上で、[Botを作ってOAUTH2 URLを得る](https://qiita.com/PinappleHunter/items/af4ccdbb04727437477f)
 1. OAUTH2 URL へアクセスして、Botが作ったサーバーに参加することを許可（認証）する
