@@ -4,13 +4,19 @@ Translate and respond to messages posted on discord Bot. Translation is done by 
 
 # How to use on discord
 
+**Syntax**
+
+    /tran <src> <dest> <message>
+
+The parameters `src` and `dest` can be [ISO_639-1 codes](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes)
+
 **Japanese to English**
 
-    /j2e 日本語メッセージです
+    /tran ja en 日本語メッセージです
 
 **English to Japanese**
 
-    /e2j It's English Messages.
+    /tran en ja It's English Messages.
 
 # Requirement
 
