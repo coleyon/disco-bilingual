@@ -8,7 +8,35 @@ from google.cloud import translate_v2 as translate
 
 bot = commands.Bot(command_prefix="/")
 GoogleCredentials.get_application_default()
-TRANSLATION_SOFT_LIMIT = 1000
+TRANSLATION_SOFT_LIMIT = 2000
+MANUAL = """Translate and respond to messages your posted message on the discord channel.
+```
+syntax:
+  /tran <src> <dest> <message>
+    The parameters src and dest can be ISO_639-1 codes.
+    https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes
+  /man ["desc"]
+    Show manual or description of this tool.
+```
+"""
+ABOUT_THIS_TOOL = """
+```
+privacy(en):
+  This tool sends the messages you post to the Google Translate 
+  service only for the purpose of translating the messages you post.
+  If you do not want the messages you post to be 
+  sent or processed by Google Translate, please do not use this tool.
+  This tool will not use or process any information for any 
+  purpose other than the translation you instructed it.
+privacy(ja):
+  このツールは、あなたが投稿したメッセージを翻訳するためだけに、
+  あなたが投稿したメッセージをGoogle翻訳サービスへ送信して翻訳します。
+  もしあなたが、あなたの投稿するメッセージがGoogle翻訳サービスへ
+  送信されたり処理される事を望まない場合は、このツールを利用しないでください。
+  このツールは、あなたがこのツールに対して指示した翻訳以外の目的では、
+  いかなる情報収集も処理も行いません。
+```
+"""
 
 
 @bot.event
@@ -20,21 +48,29 @@ async def on_ready():
     print("------------------------")
 
 
+def _get_attrbution():
+    return discord.File(
+        "google-translate-attribution.png", filename="google-translate-attribution.png"
+    )
+
+
 @bot.command(name="man")
-async def manual(ctx):
-    """Get a languages that can be translated into the target language.
+async def manual(ctx, opt=""):
+    """manual command
 
     Example:
-        `/man`
+        `/man` - show how to use this tool.
+        `/man [desc]` - show about this tool.
     """
-    await ctx.channel.send(
-        "Syntax: \n`/tran <src> <dest> <message>`\nThe parameters `src` and `dest` can be `ISO_639-1 codes`.\n\nSee:\n<https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes>"
-    )
+    if opt == "desc":
+        await ctx.channel.send(ABOUT_THIS_TOOL)
+    else:
+        await ctx.channel.send(MANUAL)
 
 
 @bot.command(name="tran")
 async def translate_message(ctx, src, target):
-    """Translate the text on content into dest language.
+    """Translate the posted message into target language.
 
     Example:
         `/tran en ja Hello World, I'm Shingen Takeda.`
@@ -55,7 +91,7 @@ async def translate_message(ctx, src, target):
         author=ctx.author.display_name,
         translated=result["translatedText"],
     )
-    await ctx.channel.send(unescape(msg))
+    await ctx.channel.send(unescape(msg), file=_get_attrbution())
 
 
 bot.run(os.getenv("DISCORD_BOT_TOKEN"))

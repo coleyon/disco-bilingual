@@ -1,6 +1,7 @@
 # Description
 
-Translate and respond to messages posted on discord Bot. Translation is done by Google Cloud Translation.
+Translate and respond to messages posted on discord.
+The translation is performed by [Cloud Translation API](https://cloud.google.com/translate/docs).
 
 # How to use on discord
 
@@ -50,7 +51,3 @@ The parameters `src` and `dest` can be [ISO_639-1 codes](https://en.wikipedia.or
 1. `docker-compose.yml` の `DISCORD_BOT_TOKEN` 環境変数 にBotのトークンを指定する
 1. `docker-copose up -d` する
 
-
-# TODO
-
-Allow translations in more languages.
